@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>每日大赛-每日赛事类型_通勤追赛场景_和周末大赛哪个好</title>
+  <meta name="description" content="每日大赛提供每天更新的各类型赛事内容入口，覆盖技巧分享、赛果速递与参与指南，适合通勤追赛、睡前看赛果的观众快速筛选与比较不同赛事。">
+  <meta name="keywords" content="每日赛程,赛事类型,通勤追赛,赛果速递,周末大赛对比">
+  <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --surface-2: #eef2f9;
+      --border: #dae2ef;
+      --text: #1b2638;
+      --text-2: #52627a;
+      --text-3: #7a8aa3;
+      --primary: #1f4fd8;
+      --primary-soft: #e4ecff;
+      --accent: #e85d2a;
+      --accent-soft: #fff0e8;
+      --success: #1d8f5a;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 2px 12px rgba(20, 40, 80, .06);
+      --shadow-lg: 0 8px 30px rgba(20, 40, 80, .10);
+      --header-h: 64px;
+      --notice-h: 36px;
+      --font: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--notice-h) + var(--header-h) + 12px); }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+
+    /* ---- 吸顶公告 + 页头 ---- */
+    .sticky-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .notice-bar {
+      height: var(--notice-h);
+      background: linear-gradient(90deg, #1f4fd8, #3a6df0);
+      color: #fff;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+      letter-spacing: .3px;
+    }
+    .notice-bar strong { font-weight: 700; }
+    .notice-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: #ffd54f; flex-shrink: 0; }
+    header.site-header {
+      height: var(--header-h);
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 28px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .brand svg { width: 32px; height: 32px; display: block; }
+    .brand-text { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: .5px; white-space: nowrap; }
+    .header-nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .header-nav a {
+      padding: 6px 12px; border-radius: 8px; font-size: 14px; color: var(--text-2);
+      font-weight: 500; white-space: nowrap; transition: background .15s, color .15s;
+    }
+    .header-nav a:hover { background: var(--surface-2); color: var(--primary); text-decoration: none; }
+    .header-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .search-box { display: flex; align-items: center; background: var(--surface-2); border-radius: 20px; padding: 4px 12px; border: 1px solid transparent; transition: border .15s; }
+    .search-box:focus-within { border-color: var(--primary); background: #fff; }
+    .search-box input {
+      border: 0; background: transparent; font-size: 13px; width: 130px; padding: 4px 2px; outline: none; color: var(--text);
+    }
+    .search-box input::placeholder { color: var(--text-3); }
+    .search-box button { border: 0; background: transparent; color: var(--primary); font-size: 14px; padding: 2px 4px; font-weight: 600; }
+    .search-feedback { font-size: 13px; color: var(--accent); display: none; padding: 4px 8px; }
+    .search-feedback.show { display: block; }
+
+    /* ---- 首屏 ---- */
+    .hero {
+      max-width: 1360px; margin: 0 auto; padding: 36px 24px 28px;
+      display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: center;
+    }
+    .hero-content h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 900; line-height: 1.2; letter-spacing: -.5px; margin-bottom: 14px; color: var(--text); }
+    .hero-content .hero-lead { font-size: 16px; color: var(--text-2); max-width: 620px; margin-bottom: 22px; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .hero-tags span {
+      background: var(--surface); border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px;
+      font-size: 13px; color: var(--text-2); font-weight: 500;
+    }
+    .hero-tags span strong { color: var(--primary); font-weight: 700; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary); color: #fff; padding: 11px 26px; border-radius: 10px; font-weight: 700; font-size: 15px;
+      border: 0; display: inline-flex; align-items: center; gap: 6px; transition: background .15s, transform .1s;
+    }
+    .btn-primary:hover { background: #163fb8; text-decoration: none; }
+    .btn-ghost {
+      background: var(--surface); color: var(--text); padding: 11px 24px; border-radius: 10px; font-weight: 600; font-size: 15px;
+      border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 6px; transition: border .15s, background .15s;
+    }
+    .btn-ghost:hover { border-color: var(--primary); background: var(--primary-soft); text-decoration: none; }
+    .hero-visual {
+      background: var(--surface); border-radius: 20px; padding: 22px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+    }
+    .hero-visual-title { font-size: 13px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+    .hero-visual-title::before { content: ""; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+    .hero-visual ul li {
+      display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 14px;
+    }
+    .hero-visual ul li:last-child { border-bottom: 0; }
+    .hero-visual ul li .rank { width: 22px; height: 22px; border-radius: 6px; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: var(--text-2); flex-shrink: 0; }
+    .hero-visual ul li .rank.top { background: var(--accent-soft); color: var(--accent); }
+    .hero-visual ul li .name { font-weight: 600; color: var(--text); flex: 1; }
+    .hero-visual ul li .tag { font-size: 11px; color: var(--primary); background: var(--primary-soft); padding: 2px 8px; border-radius: 10px; font-weight: 600; white-space: nowrap; }
+
+    /* ---- 主容器 ---- */
+    .container { max-width: 1360px; margin: 0 auto; padding: 0 24px 40px; }
+    .layout { display: grid; grid-template-columns: 172px minmax(0, 1fr) 240px; gap: 28px; align-items: start; }
+
+    /* ---- 左栏 ---- */
+    .left-col { position: sticky; top: calc(var(--notice-h) + var(--header-h) + 16px); }
+    .side-panel { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px 14px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .side-panel h3 { font-size: 13px; font-weight: 800; color: var(--text-3); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .side-panel ul li { margin-bottom: 2px; }
+    .side-panel ul li a {
+      display: block; padding: 7px 10px; border-radius: 8px; font-size: 13.5px; color: var(--text-2); font-weight: 500;
+      transition: background .15s, color .15s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .side-panel ul li a:hover, .side-panel ul li a.active { background: var(--primary-soft); color: var(--primary); text-decoration: none; }
+    .side-panel .sub-note { font-size: 12px; color: var(--text-3); line-height: 1.6; margin-top: 6px; }
+
+    /* ---- 中栏 ---- */
+    .mid-col { min-width: 0; }
+    .section-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 26px 28px; margin-bottom: 24px; }
+    .section-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .section-card h2 .h2-accent { width: 4px; height: 20px; border-radius: 2px; background: var(--primary); display: inline-block; }
+    .section-card .sec-sub { font-size: 13px; color: var(--text-3); margin-bottom: 18px; }
+    .section-card h3 { font-size: 16px; font-weight: 700; margin: 18px 0 8px; color: var(--text); }
+    .section-card p { margin-bottom: 10px; color: var(--text-2); font-size: 14.5px; }
+    .section-card p strong { color: var(--text); }
+    .section-card ul.bullet { padding-left: 0; margin: 8px 0 12px; }
+    .section-card ul.bullet li { position: relative; padding-left: 18px; margin-bottom: 6px; font-size: 14.5px; color: var(--text-2); }
+    .section-card ul.bullet li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); opacity: .6; }
+
+    /* 卡片网格 */
+    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .content-card {
+      border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; background: var(--surface);
+      transition: box-shadow .2s, transform .15s, border .15s; display: flex; flex-direction: column; gap: 6px;
+    }
+    .content-card:hover { box-shadow: var(--shadow-lg); border-color: #b8c8e8; transform: translateY(-2px); }
+    .content-card .card-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .content-card .type-tag { font-size: 11px; font-weight: 700; background: var(--primary-soft); color: var(--primary); padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+    .content-card .type-tag.alt { background: var(--accent-soft); color: var(--accent); }
+    .content-card .type-tag.green { background: #e2f5ec; color: var(--success); }
+    .content-card h4 { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.4; }
+    .content-card .card-desc { font-size: 13px; color: var(--text-3); line-height: 1.55; flex: 1; }
+    .content-card .card-meta { display: flex; gap: 12px; font-size: 11.5px; color: var(--text-3); margin-top: 4px; border-top: 1px dashed var(--border); padding-top: 8px; }
+    .content-card .card-meta span { display: flex; align-items: center; gap: 3px; }
+    .content-card .kw-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+    .content-card .kw-tags em { font-style: normal; font-size: 11px; background: var(--surface-2); color: var(--text-2); padding: 1px 7px; border-radius: 8px; }
+
+    /* 动态列表 */
+    .update-list { display: flex; flex-direction: column; gap: 2px; }
+    .update-item { display: flex; align-items: baseline; gap: 10px; padding: 9px 6px; border-bottom: 1px dashed var(--border); font-size: 14px; }
+    .update-item:last-child { border-bottom: 0; }
+    .update-item .u-title { font-weight: 600; color: var(--text); white-space: nowrap; flex-shrink: 0; }
+    .update-item .u-summary { color: var(--text-3); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+    .update-item .u-time { font-size: 12px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; }
+
+    /* 分类入口 */
+    .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .cat-item {
+      border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 10px; text-align: center;
+      font-size: 13px; font-weight: 600; color: var(--text-2); background: var(--surface); transition: all .15s; display: block;
+    }
+    .cat-item:hover { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); text-decoration: none; }
+    .cat-item .cat-icon { display: block; font-size: 20px; margin-bottom: 4px; }
+
+    /* 深度解析 */
+    .deep-dive h3 { border-left: 3px solid var(--primary); padding-left: 10px; }
+    .deep-dive .highlight-box {
+      background: var(--surface-2); border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 14px 0; font-size: 14px; color: var(--text-2);
+    }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+    .compare-table th, .compare-table td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    .compare-table th { background: var(--surface-2); font-weight: 700; color: var(--text); font-size: 13px; }
+    .compare-table td { color: var(--text-2); }
+
+    /* FAQ */
+    .faq-list details { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--surface); overflow: hidden; }
+    .faq-list details[open] { border-color: #b8c8e8; box-shadow: var(--shadow); }
+    .faq-list summary {
+      padding: 12px 16px; font-weight: 600; font-size: 14px; cursor: pointer; color: var(--text);
+      display: flex; justify-content: space-between; align-items: center; list-style: none;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after { content: "＋"; font-size: 16px; color: var(--text-3); transition: transform .2s; }
+    .faq-list details[open] summary::after { content: "－"; color: var(--primary); }
+    .faq-list .faq-body { padding: 0 16px 14px; font-size: 14px; color: var(--text-2); border-top: 1px solid var(--border); padding-top: 12px; }
+
+    /* 评论 */
+    .comment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .comment-item {
+      background: var(--surface-2); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: var(--text-2);
+      border: 1px solid transparent;
+    }
+    .comment-item .c-user { font-weight: 700; color: var(--text); font-size: 12.5px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .comment-item .c-user .c-avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--primary-soft); color: var(--primary); font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .comment-item .c-text { line-height: 1.55; }
+
+    /* 相关资讯 */
+    .news-list { display: flex; flex-direction: column; gap: 12px; }
+    .news-item { display: flex; gap: 14px; align-items: flex-start; padding-bottom: 12px; border-bottom: 1px dashed var(--border); }
+    .news-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .news-date {
+      flex-shrink: 0; text-align: center; background: var(--surface-2); border-radius: 8px; padding: 6px 10px; min-width: 54px;
+    }
+    .news-date .d-day { font-size: 18px; font-weight: 800; color: var(--primary); line-height: 1.1; }
+    .news-date .d-month { font-size: 11px; color: var(--text-3); }
+    .news-body h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 2px; }
+    .news-body p { font-size: 13px; color: var(--text-3); margin-bottom: 0; }
+
+    /* 相关推荐标签 */
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag-cloud a {
+      background: var(--surface-2); color: var(--text-2); padding: 6px 14px; border-radius: 20px; font-size: 13px;
+      font-weight: 500; border: 1px solid transparent; transition: all .15s;
+    }
+    .tag-cloud a:hover { background: var(--primary-soft); color: var(--primary); border-color: #b8c8e8; text-decoration: none; }
+
+    /* 引语卡 */
+    .quote-card {
+      background: linear-gradient(135deg, #1f4fd8, #3a6df0); color: #fff; border-radius: var(--radius); padding: 22px 26px;
+      margin: 14px 0; font-size: 15px; line-height: 1.6; position: relative; overflow: hidden;
+    }
+    .quote-card::before { content: "“"; position: absolute; top: -10px; right: 16px; font-size: 80px; opacity: .15; font-weight: 900; }
+    .quote-card .q-author { font-size: 13px; opacity: .85; margin-top: 10px; font-weight: 600; }
+
+    /* 时间线 */
+    .timeline { position: relative; padding-left: 20px; margin: 12px 0; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: var(--border); border-radius: 1px; }
+    .timeline-item { position: relative; margin-bottom: 14px; }
+    .timeline-item::before { content: ""; position: absolute; left: -18px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); border: 2px solid var(--surface); box-shadow: 0 0 0 2px var(--primary-soft); }
+    .timeline-item .t-time { font-size: 12px; font-weight: 700; color: var(--primary); }
+    .timeline-item .t-text { font-size: 14px; color: var(--text-2); }
+
+    /* 右栏 */
+    .right-col { position: sticky; top: calc(var(--notice-h) + var(--header-h) + 16px); }
+    .toc-panel { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px 14px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .toc-panel h3 { font-size: 13px; font-weight: 800; color: var(--text-3); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .toc-panel ul li a { display: block; padding: 5px 8px; border-radius: 6px; font-size: 13px; color: var(--text-2); transition: background .15s; border-left: 2px solid transparent; }
+    .toc-panel ul li a:hover { background: var(--surface-2); color: var(--primary); text-decoration: none; border-left-color: var(--primary); }
+    .hot-panel { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px 14px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .hot-panel h3 { font-size: 13px; font-weight: 800; color: var(--text-3); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .hot-panel ol { counter-reset: hot; }
+    .hot-panel ol li { counter-increment: hot; display: flex; align-items: baseline; gap: 8px; padding: 6px 0; font-size: 13px; color: var(--text-2); border-bottom: 1px dashed var(--border); }
+    .hot-panel ol li:last-child { border-bottom: 0; }
+    .hot-panel ol li::before { content: counter(hot); font-size: 11px; font-weight: 800; color: var(--text-3); width: 16px; flex-shrink: 0; }
+    .hot-panel ol li a { color: var(--text-2); font-weight: 500; }
+    .hot-panel ol li a:hover { color: var(--primary); text-decoration: none; }
+    .extend-panel { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px 14px; box-shadow: var(--shadow); }
+    .extend-panel h3 { font-size: 13px; font-weight: 800; color: var(--text-3); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .extend-panel ul li { padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 13px; }
+    .extend-panel ul li:last-child { border-bottom: 0; }
+    .extend-panel ul li a { color: var(--text-2); font-weight: 500; }
+    .extend-panel ul li a:hover { color: var(--primary); text-decoration: none; }
+    .extend-panel ul li .ext-tag { font-size: 11px; color: var(--primary); background: var(--primary-soft); padding: 1px 6px; border-radius: 6px; margin-left: 4px; }
+
+    /* ---- 页尾 ---- */
+    footer.site-footer {
+      background: #141c2b; color: #a8b4c8; padding: 40px 24px 24px; margin-top: 20px;
+    }
+    .footer-inner { max-width: 1360px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .footer-brand .f-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .footer-brand .f-logo svg { width: 28px; height: 28px; }
+    .footer-brand .f-logo span { font-size: 18px; font-weight: 800; color: #fff; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; color: #8b99b0; max-width: 340px; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: .5px; }
+    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul li a { color: #8b99b0; font-size: 13px; }
+    .footer-col ul li a:hover { color: #fff; text-decoration: none; }
+    .footer-bottom { padding-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; color: #6b7a92; }
+    .footer-bottom .example-note { font-size: 12px; color: #6b7a92; }
+
+    /* ---- 响应式 ---- */
+    @media (max-width: 1120px) {
+      .layout { grid-template-columns: 160px minmax(0, 1fr); }
+      .right-col { display: none; }
+      .hero { grid-template-columns: 1fr 320px; gap: 28px; }
+    }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .left-col { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 24px; }
+      .hero-visual { order: -1; }
+      .card-grid { grid-template-columns: 1fr; }
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .comment-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 22px; }
+      .header-nav { display: none; }
+      .search-box input { width: 100px; }
+    }
+    @media (max-width: 520px) {
+      .section-card { padding: 18px 16px; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-content h1 { font-size: 28px; }
+      .search-box input { width: 80px; }
+      .header-actions .btn-ghost { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+      .update-item { flex-wrap: wrap; gap: 2px 6px; }
+      .update-item .u-summary { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-wrap">
+  <div class="notice-bar">
+    <span class="dot"></span>
+    <strong>今日更新</strong> 新增 6 场夜场赛果速递 · 通勤追赛专区已开放
+  </div>
+  <header class="site-header">
+    <div class="brand">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2" width="32" height="32" rx="10" fill="#1f4fd8"/>
+        <path d="M11 18L16 13L21 18L26 13" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 23L16 18L21 23L26 18" stroke="#ffd54f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-text">每日大赛</span>
+    </div>
+    <nav class="header-nav" aria-label="频道导航">
+      <a href="/#intro">赛事简介</a>
+      <a href="/#hot">热门赛程</a>
+      <a href="/#latest">最新赛果</a>
+      <a href="/#category">赛类筛选</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#faq">常见问答</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-box">
+        <input type="search" id="siteSearch" placeholder="搜索赛事/类型" aria-label="搜索页面内容">
+        <button type="button" id="searchBtn" aria-label="执行搜索">搜索</button>
+      </div>
+      <a href="/#hot" class="btn-ghost" style="font-size:13px;padding:7px 14px;">看今日赛程</a>
+    </div>
+  </header>
+</div>
+
+<!-- 首屏 -->
+<section class="hero" aria-label="首屏介绍">
+  <div class="hero-content">
+    <h1>每日大赛</h1>
+    <p class="hero-lead">每天更新的赛事内容入口，覆盖技巧分享、赛果速递与参与指南。无论你是通勤路上刷赛果，还是睡前系统看一场深度复盘，都能按类型快速筛选。</p>
+    <div class="hero-tags">
+      <span><strong>12</strong> 类赛程</span>
+      <span><strong>每日</strong> 赛果更新</span>
+      <span><strong>通勤追赛</strong> 场景</span>
+      <span><strong>周末大赛</strong> 对比</span>
+    </div>
+    <div class="hero-actions">
+      <a href="/#hot" class="btn-primary">浏览今日热门赛程 →</a>
+      <a href="/#deep" class="btn-ghost">看深度解析</a>
+    </div>
+  </div>
+  <div class="hero-visual" aria-label="今日赛程速览">
+    <div class="hero-visual-title">今日赛程速览</div>
+    <ul>
+      <li><span class="rank top">1</span><span class="name">城市定向挑战赛·夜场</span><span class="tag">今晚 20:00</span></li>
+      <li><span class="rank top">2</span><span class="name">短池游泳计时赛</span><span class="tag">赛果已出</span></li>
+      <li><span class="rank">3</span><span class="name">社区篮球 3V3 擂台</span><span class="tag">报名中</span></li>
+      <li><span class="rank">4</span><span class="name">周末骑行爬坡积分赛</span><span class="tag">周六场</span></li>
+      <li><span class="rank">5</span><span class="name">青少年围棋快棋赛</span><span class="tag">复盘更新</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="container">
+  <div class="layout">
+
+    <!-- 左栏 -->
+    <aside class="left-col" aria-label="频道与筛选">
+      <div class="side-panel">
+        <h3>频道索引</h3>
+        <ul>
+          <li><a href="/#intro" class="active">赛事简介</a></li>
+          <li><a href="/#hot">热门赛程</a></li>
+          <li><a href="/#latest">最新赛果</a></li>
+          <li><a href="/#category">赛类筛选</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#guide">参与指南</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#comments">赛友评论</a></li>
+          <li><a href="/#news">赛事资讯</a></li>
+          <li><a href="/#recommend">相关推荐</a></li>
+        </ul>
+      </div>
+      <div class="side-panel">
+        <h3>按类型筛选</h3>
+        <ul>
+          <li><a href="/#category">竞技对抗类</a></li>
+          <li><a href="/#category">计时挑战类</a></li>
+          <li><a href="/#category">团队协作类</a></li>
+          <li><a href="/#category">棋牌策略类</a></li>
+          <li><a href="/#category">户外耐力类</a></li>
+        </ul>
+        <div class="sub-note">点击分类可定位到筛选入口，按赛制与时长比较。</div>
+      </div>
+      <div class="side-panel">
+        <h3>搜索热词</h3>
+        <ul>
+          <li><a href="/#faq">每日大赛多久更新</a></li>
+          <li><a href="/#hot">通勤追赛看什么</a></li>
+          <li><a href="/#deep">周末大赛对比</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- 中栏 -->
+    <main class="mid-col">
+
+      <!-- 1. 内容简介 -->
+      <section class="section-card" id="intro">
+        <h2><span class="h2-accent"></span>赛事简介</h2>
+        <p class="sec-sub">了解每日大赛的内容方向与消费方式</p>
+        <p><strong>每日大赛</strong>聚焦每天更新的各类型赛事内容，把赛程信息、赛果速递和参与指南放在同一个阅读入口。页面对赛事按赛制与时长做了归类，方便你根据“通勤追赛”或“睡前看赛果”的不同场景快速找到适合的内容。</p>
+        <p>内容类型上覆盖竞技对抗、计时挑战、团队协作、棋牌策略和户外耐力五大方向。每个方向下都有具体的赛事条目，而不是笼统的类别标签。比如计时挑战类会细分到短池游泳计时赛、骑行爬坡积分赛等可搜索的具体名称。</p>
+        <p>更新节奏方面，每日大赛保持每天至少一轮赛果速递，热门赛程在开赛前 2—3 小时更新提醒。如果你在比较“每日大赛和周末大赛哪个更适合自己”，可以关注深度解析中的对照部分——两者在赛制密度、参与门槛和观赛时长上有明显区别。</p>
+        <p>适合人群包括：希望利用碎片时间追赛的上班族、想系统了解某类赛事规则的新参与者，以及为孩子筛选棋牌策略类赛事的家长。页面不设强制登录，所有赛程摘要与赛果信息打开即可阅读。</p>
+      </section>
+
+      <!-- 2. 热门内容推荐 -->
+      <section class="section-card" id="hot">
+        <h2><span class="h2-accent"></span>今日热门赛程推荐</h2>
+        <p class="sec-sub">按热度与更新时间整理的 6 场可追赛事</p>
+        <div class="card-grid">
+          <article class="content-card">
+            <div class="card-top"><span class="type-tag">竞技对抗</span><span class="type-tag alt">今晚开赛</span></div>
+            <h4>城市定向挑战赛·夜场</h4>
+            <div class="kw-tags"><em>通勤追赛</em><em>夜场赛果</em><em>定向越野</em></div>
+            <p class="card-desc">今晚 20:00 开赛，5 人团队在城市街区完成打卡任务。适合下班后顺路观赛，赛果预计 22:30 前更新。</p>
+            <div class="card-meta"><span>🔥 热度 9.4</span><span>⏱ 约 2.5 小时</span><span>👥 已报名 36 队</span></div>
+          </article>
+          <article class="content-card">
+            <div class="card-top"><span class="type-tag green">计时挑战</span><span class="type-tag">赛果已出</span></div>
+            <h4>短池游泳计时赛·50 米自由泳</h4>
+            <div class="kw-tags"><em>短池游泳</em><em>计时赛果</em><em>个人挑战</em></div>
+            <p class="card-desc">个人计时项目，按年龄组分批下水。赛果已整理成对比表，可查看同组选手的分段用时差异。</p>
+            <div class="card-meta"><span>🔥 热度 8.7</span><span>📊 完整赛果</span><span>⭐ 4.8 评分</span></div>
+          </article>
+          <article class="content-card">
+            <div class="card-top"><span class="type-tag">团队协作</span><span class="type-tag alt">报名中</span></div>
+            <h4>社区篮球 3V3 擂台赛</h4>
+            <div class="kw-tags"><em>3V3 篮球</em><em>社区赛事</em><em>周末大赛对比</em></div>
+            <p class="card-desc">半场 3V3 循环赛，每队 4 人轮换。适合想找周末固定运动搭子的参与者，报名截止本周五。</p>
+            <div class="card-meta"><span>🔥 热度 8.2</span><span>📅 周六开赛</span><span>👥 剩余 8 席</span></div>
+          </article>
+          <article class="content-card">
+            <div class="card-top"><span class="type-tag green">户外耐力</span><span class="type-tag">周六场</span></div>
+            <h4>周末骑行爬坡积分赛</h4>
+            <div class="kw-tags"><em>骑行爬坡</em><em>耐力赛</em><em>周末大赛</em></div>
+            <p class="card-desc">8 公里爬坡路段按用时积分，分公路车与山地车两组。赛后可查看爬坡分段排名与心率区间参考。</p>
+            <div class="card-meta"><span>🔥 热度 8.0</span><span>🚴 两组别</span><span>⭐ 4.6 评分</span></div>
+          </article>
+          <article class="content-card">
+            <div class="card-top"><span class="type-tag">棋牌策略</span><span class="type-tag">复盘更新</span></div>
+            <h4>青少年围棋快棋赛·U12 组</h4>
+            <div class="kw-tags"><em>围棋快棋</em><em>青少年赛事</em><em>复盘解析</em></div>
+            <p class="card-desc">每方 20 分钟包干，赛后提供关键局面复盘。适合家长了解孩子棋力定位与同龄段对比。</p>
+            <div class="card-meta"><span>🔥 热度 7.8</span><span>♟ 32 人参赛</span><span>📝 复盘 4 局</span></div>
+          </article>
+          <article class="content-card">
+            <div class="card-top"><span class="type-tag alt">竞技对抗</span><span class="type-tag">明日预告</span></div>
+            <h4>羽毛球混双排位赛</h4>
+            <div class="kw-tags"><em>羽毛球混双</em><em>排位赛</em><em>睡前看赛果</em></div>
+            <p class="card-desc">固定搭档混双，三局两胜制。明日 19:00 开赛，适合睡前查看当天排位变化与搭档胜率。</p>
+            <div class="card-meta"><span>🔥 热度 7.6</span><span>🏸 16 对组合</span><span>⏱ 约 3 小时</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新更新 -->
+      <section class="section-card" id="latest">
+        <h2><span class="h2-accent"></span>最新赛果与更新动态</h2>
+        <p class="sec-sub">来自赛场的最新赛果摘要，按时间倒序</p>
+        <div class="update-list">
+          <div class="update-item"><span class="u-title">短池游泳计时赛</span><span class="u-summary">50 米自由泳各组别名次已整理，新增分段用时对比</span><span class="u-time">今天 18:20</span></div>
+          <div class="update-item"><span class="u-title">城市定向挑战赛</span><span class="u-summary">夜场路线图公布，打卡点从 8 个调整为 10 个</span><span class="u-time">今天 16:45</span></div>
+          <div class="update-item"><span class="u-title">青少年围棋快棋赛</span><span class="u-summary">U12 组第 3 轮复盘上线，重点讲解中盘转换</span><span class="u-time">今天 14:10</span></div>
+          <div class="update-item"><span class="u-title">社区篮球 3V3</span><span class="u-summary">本周六擂台赛剩余 8 个报名席位，分组抽签时间确定</span><span class="u-time">今天 11:30</span></div>
+          <div class="update-item"><span class="u-title">周末骑行爬坡赛</span><span class="u-summary">公路车组路线海拔图更新，补给点位置微调</span><span class="u-time">昨天 20:15</span></div>
+          <div class="update-item"><span class="u-title">羽毛球混双排位赛</span><span class="u-summary">明日对阵表生成，三对组合首次搭档亮相</span><span class="u-time">昨天 17:40</span></div>
+          <div class="update-item"><span class="u-title">城市定向挑战赛</span><span class="u-summary">上一站冠军队伍分享任务分配策略，时长 12 分钟</span><span class="u-time">昨天 10:05</span></div>
+          <div class="update-item"><span class="u-title">短池游泳计时赛</span><span class="u-summary">新增 100 米混合泳项目报名，截止本月底</span><span class="u-time">前天 15:30</span></div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="section-card" id="category">
+        <h2><span class="h2-accent"></span>按赛类筛选</h2>
+        <p class="sec-sub">8 个可搜索的赛事类别，点击定位对应内容方向</p>
+        <div class="cat-grid">
+          <a href="/#hot" class="cat-item"><span class="cat-icon">⚔️</span>竞技对抗类</a>
+          <a href="/#hot" class="cat-item"><span class="cat-icon">⏱️</span>计时挑战类</a>
+          <a href="/#hot" class="cat-item"><span class="cat-icon">🤝</span>团队协作类</a>
+          <a href="/#hot" class="cat-item"><span class="cat-icon">♟️</span>棋牌策略类</a>
+          <a href="/#hot" class="cat-item"><span class="cat-icon">🏔️</span>户外耐力类</a>
+          <a href="/#latest" class="cat-item"><span class="cat-icon">🏊</span>游泳计时赛</a>
+          <a href="/#latest" class="cat-item"><span class="cat-icon">🏀</span>3V3 篮球擂台</a>
+          <a href="/#latest" class="cat-item"><span class="cat-icon">🚴</span>骑行爬坡积分</a>
+        </div>
+        <p style="margin-top:14px;font-size:13px;color:var(--text-3);">以上分类按赛制与时长划分，其中“计时挑战类”更适合通勤碎片时间关注，“户外耐力类”赛程较长，建议周末大赛场景下安排观看。</p>
+      </section>
+
+      <!-- 5. 深度解析正文 -->
+      <section class="section-card deep-dive" id="deep">
+        <h2><span class="h2-accent"></span>深度解析：每日大赛的内容结构与选择逻辑</h2>
+        <p class="sec-sub">从赛类差异到场景匹配，帮你判断该看什么、什么时候看</p>
+
+        <h3>每日大赛与周末大赛的核心区别</h3>
+        <p>很多参与者在比较“每日大赛和周末大赛哪个更适合自己”时，关注点往往集中在时间投入和比赛强度上。每日大赛的赛程通常控制在 2—3 小时以内，以单场次、短周期项目为主，比如短池游泳计时赛、社区 3V3 擂台和围棋快棋赛。周末大赛则倾向多轮次、长时段，例如骑行爬坡积分赛会安排整天的分组出发。</p>
+        <p>从消费角度看，每日大赛适合通勤追赛和睡前看赛果，周末大赛更适合整块时间的深度参与。两者并非替代关系，而是节奏互补。</p>
+
+        <div class="highlight-box">
+          <strong>选择建议：</strong>工作日优先关注计时挑战类与棋牌策略类的每日赛果；周末再把注意力转向户外耐力类和团队协作类的完整赛程。
+        </div>
+
+        <h3>五类赛事的参与门槛对照</h3>
+        <table class="compare-table">
+          <thead><tr><th>赛事类别</th><th>单场时长</th><th>组队要求</th><th>适合场景</th></tr></thead>
+          <tbody>
+            <tr><td>竞技对抗类</td><td>1.5—3 小时</td><td>个人或 3—5 人</td><td>下班后观赛、周末约赛</td></tr>
+            <tr><td>计时挑战类</td><td>30—60 分钟</td><td>个人</td><td>通勤追赛、碎片时间</td></tr>
+            <tr><td>团队协作类</td><td>2—4 小时</td><td>4—6 人固定</td><td>周末大赛、团建场景</td></tr>
+            <tr><td>棋牌策略类</td><td>1—2 小时</td><td>个人或 2 人</td><td>睡前复盘、亲子陪伴</td></tr>
+            <tr><td>户外耐力类</td><td>半天以上</td><td>个人为主</td><td>周末整块时间</td></tr>
+          </tbody>
+        </table>
+
+        <h3>赛果信息的阅读顺序</h3>
+        <p>面对一场已经结束的每日大赛，建议按“最终名次 → 分段用时 → 关键节点”的顺序阅读。最终名次解决“谁赢了”的问题；分段用时能看出节奏分配是否合理；关键节点则帮助你理解比赛转折发生在哪一段。以短池游泳计时赛为例，50 米自由泳的前 15 米出水节奏往往决定后续划频，赛果页会把这一段单独标出。</p>
+        <p>如果你关注的是棋牌策略类，阅读顺序略有不同：先看胜负结果，再看中盘关键手，最后对照复盘解析。围棋快棋赛的复盘通常只展开 3—5 个关键局面，不需要逐手打谱。</p>
+
+        <h3>如何判断一场赛事是否值得追</h3>
+        <ul class="bullet">
+          <li><strong>看更新频率：</strong>每日大赛中，计时挑战类基本当天出赛果，团队协作类可能延后半天，选择你能等得起的项目。</li>
+          <li><strong>看参与规模：</strong>32 人以上的赛事通常有更完整的分组和排名，观赛信息量更大；小规模擂台赛更适合看具体对抗细节。</li>
+          <li><strong>看复盘深度：</strong>有复盘解析的赛事更适合想提升水平的参与者，纯赛果页更适合只看结果的观众。</li>
+          <li><strong>看场景匹配：</strong>通勤追赛优先选 30—60 分钟的计时类；睡前看赛果优先选当天已完结、有摘要的场次。</li>
+        </ul>
+
+        <h3>移动端追赛的实际体验</h3>
+        <p>每日大赛的页面结构对手机阅读做了适配。赛程卡片在窄屏下自动变为单列，赛果摘要保留关键数字，长表格可以横向滑动查看。如果你习惯在通勤路上刷赛果，建议先看“最新赛果与更新动态”列表，再用分类入口定位到具体项目，避免在多个页面之间来回跳转。</p>
+        <p>收藏和追更方面，页面目前通过频道锚点定位，不强制登录。你可以把“热门赛程”和“最新赛果”两个板块加入浏览器书签，每天打开就能看到当天的更新内容。周末大赛的完整赛程会提前 2—3 天在热门推荐中出现，方便你提前安排时间。</p>
+      </section>
+
+      <!-- 6. 体验指南 -->
+      <section class="section-card" id="guide">
+        <h2><span class="h2-accent"></span>参与与观赛指南</h2>
+        <p class="sec-sub">从找到赛事到看懂赛果的四个步骤</p>
+        <ol style="counter-reset: step; padding-left:0; margin-top:6px;">
+          <li style="counter-increment: step; position:relative; padding-left:38px; margin-bottom:12px; font-size:14.5px; color:var(--text-2);">
+            <span style="position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;">1</span>
+            <strong>按场景选类型：</strong>通勤追赛选计时挑战类，周末大赛选户外耐力或团队协作类，睡前看赛果选棋牌策略类。分类入口在页面中部，点击即可定位。
+          </li>
+          <li style="counter-increment: step; position:relative; padding-left:38px; margin-bottom:12px; font-size:14.5px; color:var(--text-2);">
+            <span style="position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;">2</span>
+            <strong>看赛程摘要：</strong>热门赛程卡片会标注开赛时间、预计时长和报名状态。先确认时间是否合适，再决定是否深入看规则。
+          </li>
+          <li style="counter-increment: step; position:relative; padding-left:38px; margin-bottom:12px; font-size:14.5px; color:var(--text-2);">
+            <span style="position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;">3</span>
+            <strong>读赛果对比：</strong>赛果页会把同组选手的分段用时并列展示。先看名次，再看分段，最后看关键节点说明，三步就能抓住一场比赛的重点。
+          </li>
+          <li style="counter-increment: step; position:relative; padding-left:38px; margin-bottom:12px; font-size:14.5px; color:var(--text-2);">
+            <span style="position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;">4</span>
+            <strong>延伸阅读：</strong>对某类赛事产生兴趣后，通过右栏“延伸阅读”或相关推荐标签进入深度解析，了解规则细节和训练方向。
+          </li>
+        </ol>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="section-card" id="faq">
+        <h2><span class="h2-accent"></span>常见问答</h2>
+        <p class="sec-sub">关于每日大赛的更新节奏、类型选择与观看方式</p>
+        <div class="faq-list">
+          <details>
+            <summary>每日大赛一般多久更新一次赛果？</summary>
+            <div class="faq-body">计时挑战类项目通常在比赛结束后 2—4 小时内更新赛果；团队协作类因为涉及成绩核验，可能延后到当天晚间。棋牌策略类的复盘解析一般在赛后 24 小时内补充。页面顶部公告条会提示当天的更新进度。</div>
+          </details>
+          <details>
+            <summary>每日大赛的类型适合什么人看？</summary>
+            <div class="faq-body">竞技对抗类适合喜欢强节奏对抗的观众；计时挑战类适合通勤碎片时间快速浏览；棋牌策略类更适合愿意花时间看复盘、想提升水平的参与者；户外耐力类的赛程较长，更适合周末大赛场景下完整观看。</div>
+          </details>
+          <details>
+            <summary>通勤追赛应该优先关注哪些赛事？</summary>
+            <div class="faq-body">优先关注单场时长在 30—60 分钟的计时挑战类，比如短池游泳计时赛。这类赛事赛果结构清晰，分段用时对比一目了然，地铁上几分钟就能看完一场。团队协作类建议留到周末再看完整回放或复盘。</div>
+          </details>
+          <details>
+            <summary>每日大赛和周末大赛哪个更适合新手参与？</summary>
+            <div class="faq-body">如果只是想先了解规则和节奏，每日大赛的计时挑战类和棋牌策略类门槛更低，单场压力小。周末大赛的团队协作类和户外耐力类对体能和配合要求更高，建议先以观赛身份熟悉流程，再考虑报名。</div>
+          </details>
+          <details>
+            <summary>赛果页里的分段用时怎么看？</summary>
+            <div class="faq-body">分段用时是把整场比赛按距离或时间切成若干段，分别记录用时。以游泳计时赛为例，50 米自由泳会拆成出发、途中游和到边三段。对比同组选手的分段数据，能看出谁在前程领先、谁在后程反超，比只看最终名次更有参考价值。</div>
+          </details>
+          <details>
+            <summary>页面上的赛事信息可以直接报名吗？</summary>
+            <div class="faq-body">页面展示的是赛程摘要与参与指南，报名状态以卡片标注为准。标注“报名中”的赛事会说明剩余席位与截止时间，具体报名入口以实际赛事组织方公布的信息为准。页面不代替组织方收集报名资料。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="section-card" id="comments">
+        <h2><span class="h2-accent"></span>赛友评论</h2>
+        <p class="sec-sub">来自参与者和观众的 14 条真实语气反馈</p>
+        <div class="comment-grid">
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">林</span>林间慢跑</div><div class="c-text">定向夜场那场的路线图比上一站复杂，打卡点多了两个，赛果更新速度还行。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">陈</span>陈小舟</div><div class="c-text">短池游泳的分段用时表很实用，终于能对比同组选手的出发反应了。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">王</span>王不晚</div><div class="c-text">通勤路上看计时赛赛果刚刚好，十分钟看完，不耽误换乘。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">赵</span>赵四格</div><div class="c-text">围棋复盘只挑了四个关键局面，对业余棋友很友好，不用逐手打谱。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">周</span>周周骑行</div><div class="c-text">骑行爬坡积分赛的海拔图更新了，补给点位置比之前合理。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">吴</span>吴敌</div><div class="c-text">3V3 擂台报名还剩八个席位，想组队的要抓紧了。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">郑</span>郑在看</div><div class="c-text">周末大赛和每日大赛的区别讲得挺清楚，我这种新手知道先看什么了。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">孙</span>孙小满</div><div class="c-text">羽毛球混双对阵表明天出，希望多来几场三局打满的。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">刘</span>刘六六</div><div class="c-text">赛果摘要如果能再短一点就好了，通勤时看长段落有点累。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">黄</span>黄阿策</div><div class="c-text">棋牌策略类的复盘深度可以，但希望增加成人组的赛事。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">徐</span>徐慢慢</div><div class="c-text">睡前看赛果的习惯养成了，每天十分钟翻一遍最新动态。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">马</span>马小跳</div><div class="c-text">定向赛冠军队的任务分配分享很干货，比单纯看名次有用。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">朱</span>朱古力</div><div class="c-text">分类入口按赛制分比按日期分更好找，希望保持。</div></div>
+          <div class="comment-item"><div class="c-user"><span class="c-avatar">胡</span>胡一可</div><div class="c-text">整体信息密度合适，就是部分赛事的时间标注可以再显眼些。</div></div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="section-card" id="news">
+        <h2><span class="h2-accent"></span>赛事资讯速递</h2>
+        <p class="sec-sub">与赛程、规则和参与方式相关的 6 条动态</p>
+        <div class="news-list">
+          <div class="news-item">
+            <div class="news-date"><div class="d-day">18</div><div class="d-month">9月</div></div>
+            <div class="news-body"><h4>城市定向挑战赛夜场路线公布，打卡点增至 10 个</h4><p>新路线覆盖三个街区，任务类型增加协作类关卡，预计完赛时间延长 20 分钟。</p></div>
+          </div>
+          <div class="news-item">
+            <div class="news-date"><div class="d-day">17</div><div class="d-month">9月</div></div>
+            <div class="news-body"><h4>短池游泳计时赛新增 100 米混合泳项目</h4><p>报名截止本月底，按年龄组分批下水，赛果将提供四式分段用时。</p></div>
+          </div>
+          <div class="news-item">
+            <div class="news-date"><div class="d-day">16</div><div class="d-month">9月</div></div>
+            <div class="news-body"><h4>社区篮球 3V3 擂台赛分组规则调整</h4><p>本周起按报名顺序抽签分组，避免强队过早相遇，循环赛程延长半天。</p></div>
+          </div>
+          <div class="news-item">
+            <div class="news-date"><div class="d-day">15</div><div class="d-month">9月</div></div>
+            <div class="news-body"><h4>青少年围棋快棋赛复盘视角升级</h4><p>新增中盘转换专题，每轮挑选 3 个关键局面做对比讲解，适合家长陪同观看。</p></div>
+          </div>
+          <div class="news-item">
+            <div class="news-date"><div class="d-day">14</div><div class="d-month">9月</div></div>
+            <div class="news-body"><h4>骑行爬坡积分赛公路车组路线微调</h4><p>取消一段施工路段，总爬升减少 40 米，补给点位置相应后移。</p></div>
+          </div>
+          <div class="news-item">
+            <div class="news-date"><div class="d-day">13</div><div class="d-month">9月</div></div>
+            <div class="news-body"><h4>羽毛球混双排位赛引入固定搭档规则</h4><p>同一对组合需连续参加两站才能计入排位积分，减少临时组队对排名的影响。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="section-card" id="recommend">
+        <h2><span class="h2-accent"></span>相关推荐方向</h2>
+        <p class="sec-sub">按具体内容方向延伸的 8 个可搜索标签</p>
+        <div class="tag-cloud">
+          <a href="/#hot">短池游泳计时赛赛果</a>
+          <a href="/#hot">城市定向夜场路线</a>
+          <a href="/#hot">3V3 篮球擂台报名</a>
+          <a href="/#hot">围棋快棋复盘解析</a>
+          <a href="/#hot">骑行爬坡分段排名</a>
+          <a href="/#deep">每日大赛与周末大赛对比</a>
+          <a href="/#deep">通勤追赛时间安排</a>
+          <a href="/#faq">赛果分段用时怎么看</a>
+        </div>
+      </section>
+
+      <!-- 11. 精选内容 / 引语卡 + 时间线 -->
+      <section class="section-card" id="featured">
+        <h2><span class="h2-accent"></span>赛友说与本周赛程线</h2>
+        <p class="sec-sub">来自参与者的经验分享与接下来三天的节奏</p>
+        <div class="quote-card">
+          连续看了两周的计时赛赛果，最大的收获不是记住名次，而是学会看分段用时。哪一段掉了速度，一目了然，比看总成绩更有训练参考价值。
+          <div class="q-author">—— 短池游泳参赛者 陈小舟</div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="t-time">今天 20:00</div><div class="t-text">城市定向挑战赛夜场开赛，赛果预计 22:30 更新</div></div>
+          <div class="timeline-item"><div class="t-time">明天 19:00</div><div class="t-text">羽毛球混双排位赛，三对首次搭档组合亮相</div></div>
+          <div class="timeline-item"><div class="t-time">周六 08:30</div><div class="t-text">周末骑行爬坡积分赛，公路车与山地车分组出发</div></div>
+          <div class="timeline-item"><div class="t-time">周六 14:00</div><div class="t-text">社区篮球 3V3 擂台赛抽签分组，循环赛开打</div></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右栏 -->
+    <aside class="right-col" aria-label="辅助阅读">
+      <div class="toc-panel">
+        <h3>页内导航</h3>
+        <ul>
+          <li><a href="/#intro">赛事简介</a></li>
+          <li><a href="/#hot">今日热门赛程</a></li>
+          <li><a href="/#latest">最新赛果动态</a></li>
+          <li><a href="/#category">按赛类筛选</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#guide">参与指南</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#comments">赛友评论</a></li>
+          <li><a href="/#news">赛事资讯</a></li>
+          <li><a href="/#recommend">相关推荐</a></li>
+        </ul>
+      </div>
+      <div class="hot-panel">
+        <h3>热门条目</h3>
+        <ol>
+          <li><a href="/#hot">城市定向挑战赛·夜场</a></li>
+          <li><a href="/#hot">短池游泳计时赛</a></li>
+          <li><a href="/#hot">社区篮球 3V3 擂台</a></li>
+          <li><a href="/#hot">周末骑行爬坡积分赛</a></li>
+          <li><a href="/#hot">青少年围棋快棋赛</a></li>
+        </ol>
+      </div>
+      <div class="extend-panel">
+        <h3>延伸阅读</h3>
+        <ul>
+          <li><a href="/#deep">每日大赛与周末大赛对比</a><span class="ext-tag">选择</span></li>
+          <li><a href="/#deep">赛果分段用时阅读方法</a><span class="ext-tag">方法</span></li>
+          <li><a href="/#faq">通勤追赛适合看什么</a><span class="ext-tag">场景</span></li>
+          <li><a href="/#faq">新手先参与哪类赛事</a><span class="ext-tag">入门</span></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="f-logo">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="2" width="32" height="32" rx="10" fill="#1f4fd8"/>
+            <path d="M11 18L16 13L21 18L26 13" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11 23L16 18L21 23L26 18" stroke="#ffd54f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>每日大赛</span>
+        </div>
+        <p>每天更新的赛事内容入口，覆盖竞技对抗、计时挑战、团队协作、棋牌策略与户外耐力五类方向，为通勤追赛和睡前看赛果提供清晰的筛选路径。</p>
+      </div>
+      <div class="footer-col">
+        <h4>赛事频道</h4>
+        <ul>
+          <li><a href="/#hot">热门赛程</a></li>
+          <li><a href="/#latest">最新赛果</a></li>
+          <li><a href="/#category">赛类筛选</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>参与参考</h4>
+        <ul>
+          <li><a href="/#guide">参与指南</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#comments">赛友评论</a></li>
+          <li><a href="/#recommend">相关推荐</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>内容方向</h4>
+        <ul>
+          <li><a href="/#hot">短池游泳计时赛</a></li>
+          <li><a href="/#hot">城市定向挑战赛</a></li>
+          <li><a href="/#hot">3V3 篮球擂台</a></li>
+          <li><a href="/#hot">围棋快棋复盘</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 每日大赛 · 内容示例站点</span>
+      <span class="example-note">部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    const searchInput = document.getElementById('siteSearch');
+    const searchBtn = document.getElementById('searchBtn');
+    const sections = document.querySelectorAll('.section-card');
+
+    function clearHighlights() {
+      document.querySelectorAll('.search-feedback').forEach(el => el.remove());
+      sections.forEach(sec => { sec.style.display = ''; });
+    }
+
+    function runSearch() {
+      const q = (searchInput.value || '').trim().toLowerCase();
+      clearHighlights();
+      if (!q) return;
+
+      let found = 0;
+      sections.forEach(sec => {
+        const text = sec.textContent.toLowerCase();
+        if (text.includes(q)) {
+          sec.style.display = '';
+          found++;
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+
+      const feedback = document.createElement('div');
+      feedback.className = 'search-feedback show';
+      if (found === 0) {
+        feedback.textContent = '未找到与“' + searchInput.value + '”相关的内容，请尝试其他关键词，如“游泳”“围棋”“骑行”。';
+        sections.forEach(sec => { sec.style.display = ''; });
+        const firstSection = document.querySelector('.section-card');
+        if (firstSection) firstSection.parentNode.insertBefore(feedback, firstSection);
+      } else {
+        feedback.textContent = '已筛选出 ' + found + ' 个相关板块，清除搜索可恢复全部内容。';
+        const firstSection = document.querySelector('.section-card');
+        if (firstSection) firstSection.parentNode.insertBefore(feedback, firstSection);
+      }
+    }
+
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); runSearch(); }
+    });
+    searchInput.addEventListener('input', function() {
+      if (this.value.trim() === '') {
+        clearHighlights();
+      }
+    });
+  })();
+</script>
+
+</body>
+          </html>
